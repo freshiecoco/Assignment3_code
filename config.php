@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__);
@@ -12,8 +12,8 @@ return [
 		'Github' => [
             'enabled' => true,
             'keys' => [
-                'id' => $_ENV['HUB_ID'],
-                'secret' => $_ENV['HUB_SECRET'],
+                'id' => $_ENV['GITHUB_ID'],
+                'secret' => $_ENV['GITHUB_SECRET'],
             ],
 		]
 	],

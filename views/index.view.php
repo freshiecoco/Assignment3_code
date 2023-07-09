@@ -1,7 +1,6 @@
-<?php
-    // display all posts.
-    // conditionally render edit and delete options based on the currently authenticated user.
-?>
+<!doctype html>
+<html lang="en" data-theme="retro">
+
 <?php require_once 'header.php' ?>
 <body>
 <?php require_once 'nav.php' ?>
@@ -21,12 +20,11 @@
                 <div class="flex items-center">
                     <div class="avatar">
                         <div class="w-6 rounded-full">
-                            <img src="../../images/<?= htmlspecialchars($article->profile_pic) ?>" />
+                            <img src="../../images/<?= htmlspecialchars($article->profile_pic) ?>"  alt="author_profile"/>
                         </div>
                     </div>
                     <p class="text-xs m-1" >Posted by <?= htmlspecialchars($article->author_name) ?></p>
                 </div>
-
             </div>
 
             <?php if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $article->author_id) { ?>

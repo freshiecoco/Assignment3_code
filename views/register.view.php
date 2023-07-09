@@ -1,6 +1,6 @@
-<?php
-    // show the form for registering a new user!
-?>
+<!doctype html>
+<html lang="en" data-theme="retro">
+
 <?php require_once 'header.php' ?>
 <body>
 <div class="flex flex-col justify-center items-center h-screen">

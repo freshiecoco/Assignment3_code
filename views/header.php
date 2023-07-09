@@ -1,5 +1,3 @@
-<!doctype html>
-<html lang="en" data-theme="retro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -7,5 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Assignment 2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="/dist/output.css" rel="stylesheet">
 </head>
+
+<?php require_once 'debug_session_data.php' ?>

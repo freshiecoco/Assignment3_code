@@ -8,7 +8,8 @@ class Application {
 	private Request $request;
 	private Response $response;
 
-	public function __construct() {
+	public function __construct()
+    {
 		$this->request = new Request();
 		$this->response = new Response();
 		$this->router = new Router($this->request, $this->response);
@@ -18,5 +19,4 @@ class Application {
 		session_start();
 		$this->router->resolve();
 	}
-
 }

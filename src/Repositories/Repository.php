@@ -5,6 +5,12 @@ namespace src\Repositories;
 use PDO;
 use PDOException;
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+
 /**
  * An example of a base class to reduce database connectivity configuration for each repository subclass.
  */
@@ -21,10 +27,10 @@ class Repository {
 		// Note: in a real application we'd want to use environment variables to store credentials and any other environment specific data.
 		// If you're interested in how to do this, look into: https://github.com/vlucas/phpdotenv
 		// If you know about PHP frameworks, DotEnv is what Laravel uses for this purpose
-		$this->hostname = 'localhost';
-		$this->username = 'root';
-		$this->databaseName = 'article_aggregator_co';
-		$this->databasePassword = 'ou8sujeff';
+		$this->hostname = $_ENV["DATABASE_HOSTNAME"];
+		$this->username = $_ENV["DATABASE_USERNAME"];
+		$this->databaseName = $_ENV["DATABASE_NAME"];
+		$this->databasePassword = $_ENV["DATABASE_PASSWORD"];
 		$this->charset = 'utf8mb4';
 
 		$dsn = "mysql:host=$this->hostname;dbname=$this->databaseName;charset=$this->charset";

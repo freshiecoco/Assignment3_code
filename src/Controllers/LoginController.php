@@ -53,7 +53,7 @@ class LoginController extends Controller {
      * @throws InvalidArgumentException
      */
     public function loginWithGithub(): void {
-        $config = include 'config.php';
+        $config = require_once __DIR__ . '/../../config.php';
 		$hybridauth = new Hybridauth($config);
 		$adapter = $hybridauth->authenticate('GitHub');
 		$userInfoGithub = $adapter->getUserProfile();

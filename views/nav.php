@@ -1,6 +1,3 @@
-<?php
-// some kind of reusable navigation bar here!
-?>
 <div class="navbar bg-secondary">
   <div class="flex-1">
     <a href="/" class="btn btn-ghost normal-case text-3xl">JNewCo.</a>

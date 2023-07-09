@@ -45,7 +45,7 @@
 
         <form action="/login/github" method="GET">
             <button type="submit">Login with Github</button>
-      </form>
+        </form>
     </div>
 </div>
 </body>
