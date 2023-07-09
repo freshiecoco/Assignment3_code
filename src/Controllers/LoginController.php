@@ -10,12 +10,14 @@ use src\Repositories\UserRepository as UserRepository;
 require_once __DIR__ . '/../../vendor/hybridauth/hybridauth/src/autoload.php'; 
 use Hybridauth\Hybridauth;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
 	/**
 	 * Show the login page.
 	 * @return void
 	 */
-	public function index(): void {
+	public function index(): void
+    {
 		$this->render('login');
 	}
 
@@ -31,22 +33,18 @@ class LoginController extends Controller {
         $user = $userRepository->getUserByEmail($email);
         if (!$user)
         {
+            $_SESSION['login_error'] = "Account does not exist!";
             $this->redirect("/login");
         }
 
-        $hash = $user->password_digest;
-        $id = $user->id;
-        $name = $user->name;
-        $profile_picture = $user->profile_picture;
-        if (password_verify($request->input("password"), $hash))
+        if (password_verify($request->input("password"), $user->password_digest))
         {
-            $this->setSessionData("user_id", $id);
-            $this->setSessionData("user_name", $name);
-            $this->setSessionData("user_pic", $profile_picture);
+            $this->setUserSession($user->id, $user->name, $user->profile_picture);
             $this->redirect("/");
         }
         else
         {
+            $_SESSION['login_error'] = "Password is incorrect!";
             $this->redirect("/login");
         }
     }
@@ -61,26 +59,24 @@ class LoginController extends Controller {
 		$hybridauth = new Hybridauth($config);
 		$adapter = $hybridauth->authenticate('GitHub');
 		$userInfoGithub = $adapter->getUserProfile();
-
-        // DEBUG START
-        $this->setSessionData("github_info", $userInfoGithub->toString());
-        // DEBUG END
-
-		//check if user already exists in the database
 		$userRepository = new UserRepository();
 		$user = $userRepository->getUserByGithubId($userInfoGithub->identifier);
-		// if not, create a new entry in your "users" table using the GitHub details 
+
 		if (!$user)
         {
 			$user = $userRepository->saveUserGithub($userInfoGithub);
 		}
 
-		$this->setSessionData('user_id', $user->id);
-		$this->setSessionData('user_name', $user->name);
-		$this->setSessionData('user_pic', $user->profile_picture);
+		$this->setUserSession($user->id, $user->name, $user->profile_picture);
 		$this->setSessionData('loginWithGithub', 'true');
-
 		$adapter->disconnect();
 		$this->redirect('/');
 	}
+
+    private function setUserSession(string $id, string $name, string $pic): void
+    {
+        $this->setSessionData('user_id', $id);
+        $this->setSessionData('user_name', $name);
+        $this->setSessionData('user_pic', $pic);
+    }
 }

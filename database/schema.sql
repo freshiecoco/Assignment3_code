@@ -1,3 +1,4 @@
+drop database if exists article_aggregator_co;
 create database article_aggregator_co;
 use article_aggregator_co;
 
@@ -18,4 +19,10 @@ create table articles (
    updated_at datetime,
    author_id int not null,
    foreign key (author_id) references users (id)
+);
+
+create table user_github_token (
+    id int primary key,
+    foreign key (id) references users (id),
+    access_token varchar(255)
 );
