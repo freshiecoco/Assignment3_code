@@ -15,7 +15,8 @@ class Application {
 		$this->router = new Router($this->request, $this->response);
 	}
 
-	public function run(): void {
+	public function run(): void
+    {
 		session_start();
 		$this->router->resolve();
 	}

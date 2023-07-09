@@ -1,5 +1,6 @@
-<?php
-?>
+<!doctype html>
+<html lang="en" data-theme="retro">
+
 <?php require_once 'header.php' ?>
 <body>
 <div class="bg-secondary flex flex-col justify-center items-center h-screen">

@@ -1,6 +1,6 @@
-<?php
-    // display profile information and allow updating the username and photo
-?>
+<!doctype html>
+<html lang="en" data-theme="retro">
+
 <?php require_once 'header.php' ?>
 <body>
 <?php require_once 'nav.php' ?> 

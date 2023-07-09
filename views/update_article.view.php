@@ -1,6 +1,6 @@
-<?php
-    // display the update article form, and ensure it populates with data when the page renders.
-?>
+<!doctype html>
+<html lang="en" data-theme="retro">
+
 <?php require_once 'header.php' ?>
 <body>
 <?php require_once 'nav.php' ?> 

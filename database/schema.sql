@@ -3,10 +3,11 @@ use article_aggregator_co;
 
 create table users (
    id int auto_increment not null primary key,
-   password_digest varchar(255),
+   password_digest varchar(255) null,
    email varchar(255) not null unique,
    name varchar(255) not null,
-   profile_picture varchar(255) default 'default.jpg'
+   profile_picture varchar(255) default 'default.jpg',
+   github_identifier varchar(15)
 );
 
 create table articles (
