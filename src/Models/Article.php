@@ -9,6 +9,7 @@ require_once 'Model.php';
  * @property string $title
  * @property string $url
  * @property int $author_id
+ * @property string $author_name;
  */
 class Article extends Model {
 

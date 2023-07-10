@@ -133,5 +133,4 @@ class ArticleController extends Controller {
 		$articleRepository->deleteArticleById(intval($articleId));
 		$this->redirect('/');
 	}
-
 }

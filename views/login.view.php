@@ -44,7 +44,7 @@
                 </div>
         </form>
 
-        <form action="/login/github" method="GET">
+        <form action="/login/github" method="post">
             <button type="submit">Login with Github</button>
         </form>
     </div>

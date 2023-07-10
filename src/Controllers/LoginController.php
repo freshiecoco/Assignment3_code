@@ -53,11 +53,13 @@ class LoginController extends Controller
      * @throws UnexpectedValueException
      * @throws InvalidArgumentException
      */
-    public function loginWithGithub(): void
+    public function loginWithGithubPost(): void
     {
         $config = require_once __DIR__ . '/../../config.php';
 		$hybridauth = new Hybridauth($config);
 		$adapter = $hybridauth->authenticate('GitHub');
+        $token = $adapter->getAccessToken();
+
 		$userInfoGithub = $adapter->getUserProfile();
 		$userRepository = new UserRepository();
 		$user = $userRepository->getUserByGithubId($userInfoGithub->identifier);
@@ -67,11 +69,21 @@ class LoginController extends Controller
 			$user = $userRepository->saveUserGithub($userInfoGithub);
 		}
 
+        $userRepository->storeGithubAccessToken($user->id, $token["access_token"]);
 		$this->setUserSession($user->id, $user->name, $user->profile_picture);
 		$this->setSessionData('loginWithGithub', 'true');
 		$adapter->disconnect();
 		$this->redirect('/');
 	}
+
+    /**
+     * @throws UnexpectedValueException
+     * @throws InvalidArgumentException
+     */
+    public function loginWithGithubGet(): void
+    {
+        $this->loginWithGithubPost();
+    }
 
     private function setUserSession(string $id, string $name, string $pic): void
     {

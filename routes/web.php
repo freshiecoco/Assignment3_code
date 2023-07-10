@@ -16,7 +16,8 @@ Router::get('/', [ArticleController::class, 'index']); // the root/index page
 
 Router::get('/login', [LoginController::class, 'index']);
 Router::post('/login', [LoginController::class, 'login']);
-Router::get('/login/github', [LoginController::class, 'loginWithGitHub']);
+Router::get('/login/github', [LoginController::class, 'loginWithGithubGet']);
+Router::post('/login/github', [LoginController::class, 'loginWithGithubPost']);
 
 Router::get('/register', [RegistrationController::class, 'index']); // show registration form.
 Router::post('/register', [RegistrationController::class, 'register']); // process a registration req.

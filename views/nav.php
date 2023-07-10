@@ -1,7 +1,6 @@
 <div class="navbar bg-secondary">
   <div class="flex-1">
-    <a href="/" class="btn btn-ghost normal-case text-3xl">JNewCo.</a>
-    <a href="/" class="btn btn-ghost normal-case text-xl">All articles</a>
+    <a href="/" class="btn btn-ghost normal-case text-3xl">FakeNews.com</a>
     <?php if(isset($_SESSION['user_id'])) { ?>
       <a href="/new?complete=true" 
         class="btn btn-ghost normal-case text-xl">New article</a>

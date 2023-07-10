@@ -19,11 +19,13 @@ class Request {
 		return $_SERVER['REQUEST_METHOD'];
 	}
 
-	public function isHttpPost() {
+	public function isHttpPost(): bool
+    {
 		return $this->method() === 'POST';
 	}
 
-	public function isHttpGet() {
+	public function isHttpGet(): bool
+    {
 		return $this->method() === 'GET';
 	}
 

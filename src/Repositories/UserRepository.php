@@ -127,4 +127,15 @@ class UserRepository extends Repository {
                    WHERE id=?");
         return $query->execute([$name, $profilePicture, $id]);
 	}
+
+    public function storeGithubAccessToken(int $id, string $token): bool
+    {
+        $query = $this->pdo->prepare(
+            "INSERT INTO user_github_token (id, access_token) 
+                   VALUES (?, ?) 
+                   ON DUPLICATE KEY UPDATE access_token = VALUES(access_token);"
+        );
+
+        return $query->execute([$id, $token]);
+    }
 }
