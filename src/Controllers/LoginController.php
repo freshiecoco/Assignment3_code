@@ -57,23 +57,7 @@ class LoginController extends Controller
     {
         $config = require_once __DIR__ . '/../../config.php';
 		$hybridauth = new Hybridauth($config);
-		$adapter = $hybridauth->authenticate('GitHub');
-        $token = $adapter->getAccessToken();
-
-		$userInfoGithub = $adapter->getUserProfile();
-		$userRepository = new UserRepository();
-		$user = $userRepository->getUserByGithubId($userInfoGithub->identifier);
-
-		if (!$user)
-        {
-			$user = $userRepository->saveUserGithub($userInfoGithub);
-		}
-
-        $userRepository->storeGithubAccessToken($user->id, $token["access_token"]);
-		$this->setUserSession($user->id, $user->name, $user->profile_picture);
-		$this->setSessionData('loginWithGithub', 'true');
-		$adapter->disconnect();
-		$this->redirect('/');
+		$hybridauth->authenticate('GitHub');
 	}
 
     /**
@@ -82,7 +66,22 @@ class LoginController extends Controller
      */
     public function loginWithGithubGet(): void
     {
-        $this->loginWithGithubPost();
+        $config = require_once __DIR__ . '/../../config.php';
+        $hybridauth = new Hybridauth($config);
+        $adapter = $hybridauth->authenticate('GitHub');
+        $userInfoGithub = $adapter->getUserProfile();
+        $userRepository = new UserRepository();
+        $user = $userRepository->getUserByGithubId($userInfoGithub->identifier);
+
+        if (!$user)
+        {
+            $user = $userRepository->saveUserGithub($userInfoGithub);
+        }
+
+        $userRepository->storeGithubAccessToken($user->id, $adapter->getAccessToken()["access_token"]);
+        $this->setUserSession($user->id, $user->name, $user->profile_picture);
+        $adapter->disconnect();
+        $this->redirect('/');
     }
 
     private function setUserSession(string $id, string $name, string $pic): void

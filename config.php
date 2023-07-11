@@ -7,7 +7,7 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 return [
-	'callback' => 'http://localhost:7777/login/github',
+	'callback' => 'http://localhost:7777/login/github/callback',
 	'providers' => [
 		'Github' => [
             'enabled' => true,
